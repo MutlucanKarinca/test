@@ -1,0 +1,32 @@
+  <head>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js" integrity="sha512-eVL5Lb9al9FzgR63gDs1MxcDS2wFu3loYAgjIH0+Hg38tCS8Ag62dwKyH+wzDb+QauDpEZjXbMn11blw8cbTJQ==" crossorigin="anonymous"></script>
+  </head>
+  
+ 
+  <!-- Plots go in blank <div> elements. 
+      You can size them in the plot layout,
+      or give the div a size as shown here.
+  -->
+    
+  <div id="tester" style="width:90%;height:250px;"></div>
+
+    <script>
+        
+        TESTER = document.getElementById('tester');
+        Plotly.newPlot( TESTER, [{
+        x: {{ enlem | safe}},
+        y: {{ boylam | safe}} }], {
+        margin: { t: 0 } } );
+
+        setInterval(function(){
+	        var update = {
+		        x: [[{{ enlem | safe }}]],
+		        y: [[{{ boylam | safe}}]]
+	        };
+	
+         Plotly.extendTraces(TESTER, update, [0]);
+        }, 1000);
+    </script>
